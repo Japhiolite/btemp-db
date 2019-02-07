@@ -1,9 +1,12 @@
+"""db_access is a compendium of high-level python functions to mess around with a database."""
+
 import sqlite3
 import pandas as pd 
 
 def connect(db_file):
     """
-    Connect to an existing sqlite database file
+    Connect to an existing sqlite database file.
+
     :param db_file: string - path to database file
     :return: connection object or None
     """
@@ -15,20 +18,20 @@ def connect(db_file):
         print(err)
 
 def close(conn, commit='Yes'):
-    """close connection to the database, commit or dont"""
+    """Close connection to the database, commit or dont."""
     if commit == 'Yes':
         conn.commit()
     conn.close()
 
 def get_tables(c):
-    """get all table names in the database"""
+    """Get all table names in the database."""
     c.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tabs = c.fetchall()
     print(tabs)
     return tabs
 
 def get_columns(c,table):
-    """get all columns in a specified table"""
+    """Get all columns in a specified table."""
     head = c.execute("select * from " + table)
     names = list(map(lambda x: x[0], head.description))
     
