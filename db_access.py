@@ -23,13 +23,14 @@ def close(conn, commit='Yes'):
 def get_tables(c):
     """get all table names in the database"""
     c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    print(c.fetchall())
-    return c.fetchall()
+    tabs = c.fetchall()
+    print(tabs)
+    return tabs
 
 def get_columns(c,table):
     """get all columns in a specified table"""
     head = c.execute("select * from " + table)
-    names = list(map(lambda x: x[0], nam.description))
+    names = list(map(lambda x: x[0], head.description))
     
     print(names)
     return(names)
